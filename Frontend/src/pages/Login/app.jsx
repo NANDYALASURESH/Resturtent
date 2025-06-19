@@ -6,7 +6,6 @@ import { Eye, EyeOff, Mail, Lock, ChefHat, User, Phone, MapPin } from 'lucide-re
 import '../Login/app.css';
 
 
-
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
@@ -99,44 +98,110 @@ const Login = () => {
     setAddress('');
   };
 
+
   return (
-    <div className="login-background">
-      {/* Animated Background Elements */}
-      <div className="background-overlay">
-        <div className="background-blob background-blob-1"></div>
-        <div className="background-blob background-blob-2"></div>
-        <div className="background-blob background-blob-3"></div>
+    <div className="login-container">
+      
+      {/* Food delivery themed background elements */}
+      <div className="background-elements">
+        {/* Delivery truck animation */}
+        <div className="food-icon truck pulse">
+          🚚
+        </div>
         
-        {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="floating-particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          >
-            🍽️
-          </div>
-        ))}
+        {/* Pizza slice floating */}
+        <div className="food-icon pizza bounce">
+          🍕
+        </div>
+        
+        {/* Burger floating */}
+        <div className="food-icon burger pulse">
+          🍔
+        </div>
+        
+        {/* French fries */}
+        <div className="food-icon fries bounce">
+          🍟
+        </div>
+        
+        {/* Taco */}
+        <div className="food-icon taco pulse">
+          🌮
+        </div>
+        
+        {/* Delivery box */}
+        <div className="food-icon delivery-box bounce">
+          📦
+        </div>
+        
+        {/* Hot dog */}
+        <div className="food-icon hotdog pulse">
+          🌭
+        </div>
+        
+        {/* Ice cream */}
+        <div className="food-icon ice-cream bounce">
+          🍦
+        </div>
+        
+        {/* Soda */}
+        <div className="food-icon soda pulse">
+          🥤
+        </div>
+        
+        {/* Donut */}
+        <div className="food-icon donut bounce">
+          🍩
+        </div>
+        
+        {/* Chicken */}
+        <div className="food-icon chicken pulse">
+          🍗
+        </div>
+        
+        {/* Location pin for delivery */}
+        <div className="food-icon location bounce">
+          📍
+        </div>
+        
+        {/* Clock for fast delivery */}
+        <div className="food-icon clock pulse">
+          ⏰
+        </div>
+        
+        {/* Money/payment */}
+        <div className="food-icon payment bounce">
+          💳
+        </div>
+        
+        {/* Phone for ordering */}
+        <div className="food-icon phone pulse">
+          📱
+        </div>
+        
+        {/* Animated gradient blobs for visual appeal */}
+        <div className="gradient-blob top-left"></div>
+        <div className="gradient-blob bottom-right"></div>
+        <div className="gradient-blob center"></div>
       </div>
 
       {/* Login Card */}
-      <div className="login-card">
-        <div className="login-card-inner">
+      <div className="login-card-container">
+        <div className="login-card">
+          
           {/* Header */}
-          <div className=" cardss text-center mb-8">
-            <div className="header-logo">
-              <ChefHat className="w-8 h-8 text-white" />
+          <div className="header">
+            <div className="logo-container">
+              <ChefHat className="logo-icon" />
             </div>
-            <h1 className="header-title">
-              Keerthi Foods
+            <h1 className="app-title">
+              QuickBite
             </h1>
-            <p className="header-subtitle">
-              {isLogin ? 'Authentic flavors, delivered fresh' : 'Join our culinary community'}
+            <p className="app-subtitle">
+              {isLogin ? 'Fast food, delivered faster' : 'Join our food community'}
+            </p>
+            <p className="app-features">
+              🚀 30 min delivery • 🍕 Fresh & Hot • 📱 Easy ordering
             </p>
             
             {/* Mode Toggle */}
@@ -158,21 +223,22 @@ const Login = () => {
 
           {/* Error/Success Message */}
           {msg && (
-            <div className={`message ${msg.includes('successful') ? 'success' : 'error'} animate-fade-in`}>
-              <p className="text-sm font-medium">{msg}</p>
+            <div className={`message ${msg.includes('successful') ? 'success' : 'error'}`}>
+              <p>{msg}</p>
             </div>
           )}
 
           {/* Form */}
-          <div className="rigister">
+          <div className="form-container">
+            
             {/* Registration Fields */}
             {!isLogin && (
               <>
                 {/* Full Name Field */}
-                <div className="form-group">
+                <div className="form-field">
                   <label className="form-label">Full Name</label>
-                  <div className="input-group">
-                    <User className="input-icon" />
+                  <div className="input-container">
+                    <User className="input-icon"  />
                     <input
                       type="text"
                       placeholder="Enter your full name"
@@ -185,9 +251,9 @@ const Login = () => {
                 </div>
 
                 {/* Phone Field */}
-                <div className="form-group">
+                <div className="form-field">
                   <label className="form-label">Phone Number</label>
-                  <div className="input-group">
+                  <div className="input-container">
                     <Phone className="input-icon" />
                     <input
                       type="tel"
@@ -201,10 +267,10 @@ const Login = () => {
                 </div>
 
                 {/* Address Field */}
-                <div className="form-group">
+                <div className="form-field">
                   <label className="form-label">Address</label>
-                  <div className="input-group">
-                    <MapPin className="input-icon textarea-icon" />
+                  <div className="input-container">
+                    <MapPin className="input-icon textarea" />
                     <textarea
                       placeholder="Enter your address"
                       value={address}
@@ -219,9 +285,9 @@ const Login = () => {
             )}
 
             {/* Email Field */}
-            <div className="form-group">
+            <div className="form-field">
               <label className="form-label">Email Address</label>
-              <div className="input-group">
+              <div className="input-container">
                 <Mail className="input-icon" />
                 <input
                   type="email"
@@ -235,9 +301,9 @@ const Login = () => {
             </div>
 
             {/* Password Field */}
-            <div className="form-group">
+            <div className="form-field">
               <label className="form-label">Password</label>
-              <div className="input-group">
+              <div className="input-container">
                 <Lock className="input-icon" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -246,23 +312,22 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   className="form-input"
-                  style={{ paddingRight: '1.5rem' }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="password-toggle"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? <EyeOff className="password-toggle-icon" /> : <Eye className="password-toggle-icon" />}
                 </button>
               </div>
             </div>
 
             {/* Confirm Password Field (Registration only) */}
             {!isLogin && (
-              <div className="form-group">
+              <div className="form-field">
                 <label className="form-label">Confirm Password</label>
-                <div className="input-group">
+                <div className="input-container">
                   <Lock className="input-icon" />
                   <input
                     type={showConfirmPassword ? "text" : "password"}
@@ -271,14 +336,13 @@ const Login = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required={!isLogin}
                     className="form-input"
-                  
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="password-toggle focus:outline-none focus:ring-0 border-none bg-transparent"
+                    className="password-toggle"
                   >
-                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showConfirmPassword ? <EyeOff className="password-toggle-icon" /> : <Eye className="password-toggle-icon" />}
                   </button>
                 </div>
               </div>
@@ -288,10 +352,10 @@ const Login = () => {
             <button
               onClick={handleSubmit}
               disabled={isLoading}
-              className="submit-btn"
+              className="submit-button"
             >
-              <div className="submit-btn-overlay"></div>
-              <span className="submit-btn-content">
+              <div className="submit-button-overlay"></div>
+              <span className="submit-button-content">
                 {isLoading ? (
                   <>
                     <div className="loading-spinner"></div>
@@ -304,11 +368,10 @@ const Login = () => {
             </button>
           </div>
 
-
           {/* Footer Links */}
-          <div className="footer">
+          <div className="footer-links">
             {isLogin ? (
-              <div className="space-y-2">
+              <>
                 <div>
                   <a href="#" className="footer-link">
                     Forgot your password?
@@ -318,14 +381,14 @@ const Login = () => {
                   Don't have an account?{' '}
                   <button 
                     onClick={toggleMode}
-                    className="footer-btn"
+                    className="footer-button"
                   >
                     Register here
                   </button>
                 </p>
-              </div>
+              </>
             ) : (
-              <div className="space-y-2">
+              <>
                 <p className="footer-text">
                   By registering, you agree to our{' '}
                   <a href="#" className="footer-link">
@@ -340,12 +403,12 @@ const Login = () => {
                   Already have an account?{' '}
                   <button 
                     onClick={toggleMode}
-                    className="footer-btn"
+                    className="footer-button"
                   >
                     Sign in here
                   </button>
                 </p>
-              </div>
+              </>
             )}
           </div>
         </div>
