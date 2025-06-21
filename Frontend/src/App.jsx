@@ -7,8 +7,7 @@ import ProfileCard from "./pages/Profile/ProfileCard/app";
 import ProtectedRoute from './ProtectedRoute/app';
 import PublicRoute from "./PublicRoute/app";
 import WelcomePage from "./welcomepage/app";
-import Admin from "./Admin/Home/app";
-import AdminLogin from "./Admin/Login/app";
+import RestaurantAdminLogin from "./Admin/Login/app";
 
 function App() {
   return (
@@ -18,8 +17,7 @@ function App() {
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfileCard /></ProtectedRoute>} />
-        <Route path="/admin" element={<PublicRoute><Admin /></PublicRoute>} />
-        <Route path="/admin-login" element={<PublicRoute><AdminLogin /></PublicRoute>} />
+        <Route path="/admin-login" element={<PublicRoute><RestaurantAdminLogin /></PublicRoute>} />
       </Routes>
     </BrowserRouter>
   );

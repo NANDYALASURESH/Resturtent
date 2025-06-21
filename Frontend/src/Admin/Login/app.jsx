@@ -1,135 +1,180 @@
-import React, { useState } from 'react';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Eye, EyeOff, Mail, Lock, ChefHat } from 'lucide-react';
-import './app.css';
 
-const AdminLogin = () => {
+import React, { useState } from 'react';
+import { Eye, EyeOff, Mail, Lock, ChefHat, Shield } from 'lucide-react';
+import "../Login/app.css"
+
+const RestaurantAdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [msg, setMsg] = useState('');
+  const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const onSubmitSuccess = (jwtToken) => {
-    Cookies.set('admin_jwt_token', jwtToken, { expires: 30 });
-    navigate('/admin/home', { replace: true });
-  };
+  const [isLoginMode, setIsLoginMode] = useState(true);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMsg('');
+    setMessage('');
 
     try {
-      const res = await axios.post("http://localhost:3000/api/admin/login", {
-        email,
-        password
-      }, { withCredentials: true });
-
-      if (res.status) {
-        setMsg('Admin login successful!');
-        onSubmitSuccess(res.data.token);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      if (isLoginMode) {
+        if (email === 'admin@quickbite.com' && password === 'admin123') {
+          setMessage('Login successful! Redirecting...');
+          // In real app: navigate to admin dashboard
+        } else {
+          setMessage('Invalid credentials. Please try again.');
+        }
       } else {
-        setMsg('Invalid admin credentials.');
+        // Registration logic
+        if (email && password) {
+          setMessage('Admin account created successfully!');
+          setIsLoginMode(true);
+        } else {
+          setMessage('Please fill in all fields.');
+        }
       }
-    } catch (err) {
-      setMsg('Login failed. Please try again.');
+    } catch (error) {
+      setMessage(isLoginMode ? 'Login failed. Please check your connection.' : 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card-container">
-        <div className="login-card">
-          <div className="header">
-            <div className="logo-container">
-              <ChefHat className="logo-icon" />
+    <div className="admin-login-wrapper">
+      {/* Background Elements */}
+      <div className="admin-login-container">
+        <div className="admin-login-card">
+          {/* Header Section */}
+          <div className="admin-header">
+            <div className="admin-logo-wrapper">
+              <div className="admin-logo-circle">
+                <ChefHat className="admin-logo-icon" />
+              </div>
+              <Shield className="admin-shield-icon" />
             </div>
-            <h1 className="app-title">Admin Panel</h1>
-            <p className="app-subtitle">Manage orders, users and items</p>
+            <h1 className="admin-title">QuickBite Admin</h1>
+            <p className="admin-subtitle">
+              {isLoginMode ? 'Secure Management Portal' : 'Create Admin Account'}
+            </p>
+            <div className="admin-divider"></div>
           </div>
 
-          {msg && (
-            <div className={`message ${msg.includes('successful') ? 'success' : 'error'}`}>
-              <p>{msg}</p>
+          {/* Message Display */}
+          {message && (
+            <div className={`admin-message ${message.includes('successful') ? 'admin-message-success' : 'admin-message-error'}`}>
+              <div className="admin-message-content">
+                {message}
+              </div>
             </div>
           )}
 
-          <div className="form-container">
-            <div className="form-field">
-              <label className="form-label">Admin Email</label>
-              <div className="input-container">
-                <Mail className="input-icon" />
+          {/* Login Form */}
+          <div className="admin-form">
+            <div className="admin-form-group">
+              <label className="admin-form-label">
+                Administrator Email
+              </label>
+              <div className="admin-input-wrapper">
+                <Mail className="admin-input-icon" />
                 <input
                   type="email"
-                  placeholder="Enter admin email"
+                  placeholder="Enter your admin email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="form-input"
+                  className="admin-form-input"
+                  disabled={isLoading}
                 />
               </div>
             </div>
 
-            <div className="form-field">
-              <label className="form-label">Password</label>
-              <div className="input-container">
-                <Lock className="input-icon" />
+            <div className="admin-form-group">
+              <label className="admin-form-label">
+                Password
+              </label>
+              <div className="admin-input-wrapper">
+                <Lock className="admin-input-icon" />
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter password"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="form-input"
+                  className="admin-form-input"
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="password-toggle"
+                  className="admin-password-toggle"
+                  disabled={isLoading}
                 >
                   {showPassword ? (
-                    <EyeOff className="password-toggle-icon" />
+                    <EyeOff className="admin-toggle-icon" />
                   ) : (
-                    <Eye className="password-toggle-icon" />
+                    <Eye className="admin-toggle-icon" />
                   )}
                 </button>
               </div>
             </div>
 
             <button
+              type="button"
               onClick={handleLogin}
-              disabled={isLoading}
-              className="submit-button"
+              disabled={isLoading || !email || !password}
+              className="admin-submit-button"
             >
-              <div className="submit-button-overlay"></div>
-              <span className="submit-button-content">
+              <div className="admin-button-background"></div>
+              <span className="admin-button-text">
                 {isLoading ? (
                   <>
-                    <div className="loading-spinner"></div>
-                    Signing In...
+                    <div className="admin-loading-spinner"></div>
+                    {isLoginMode ? 'Authenticating...' : 'Creating Account...'}
                   </>
                 ) : (
-                  'Login to Admin Dashboard'
+                  <>
+                    <Shield className="admin-button-icon" />
+                    {isLoginMode ? 'Access Admin Dashboard' : 'Create Admin Account'}
+                  </>
                 )}
               </span>
             </button>
+
+            <div className="admin-mode-toggle">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsLoginMode(!isLoginMode);
+                  setMessage('');
+                  setEmail('');
+                  setPassword('');
+                }}
+                className="admin-toggle-mode-button"
+                disabled={isLoading}
+              >
+                {isLoginMode ? "Don't have an admin account? Register" : 'Already have an account? Login'}
+              </button>
+            </div>
           </div>
 
-          <div className="footer-links">
-            <div>
-              <a href="#" className="footer-link">Forgot password?</a>
+          {/* Footer Links */}
+          <div className="admin-footer">
+            <div className="admin-footer-links">
+              <a href="#" className="admin-footer-link">
+                Forgot Password?
+              </a>
+              <span className="admin-footer-separator">•</span>
+              <a href="#" className="admin-footer-link">
+                Need Help?
+              </a>
             </div>
-            <p className="footer-text">
-              Not an admin?{' '}
-              <a href="/login" className="footer-button">Go to user login</a>
-            </p>
+            <div className="admin-footer-note">
+              <p>Authorized personnel only. All access is monitored.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -137,4 +182,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default RestaurantAdminLogin;
