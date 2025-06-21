@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { 
   ShoppingCart, 
   User, 
@@ -312,7 +312,9 @@ const HomePage = () => {
       {isOpen && (
         <div className="user-popup">
           <p>Hello, User!</p>
+          <Link to="/profile">
           <button className="popup-button">Profile</button>
+          </Link>
           <button className="popup-button" onClick={onLogout}>Logout</button>
         </div>
       )}

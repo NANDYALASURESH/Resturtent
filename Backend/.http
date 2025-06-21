@@ -18,3 +18,7 @@ Content-Type: application/json
   "email": "admin@keerthifood.com",
   "password": "keerthi123"
 }
+
+### Profile (replace YOUR_TOKEN below)
+GET http://localhost:3000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODUyOWJjYzJmNDMzMDI3N2Y1YTAwYTUiLCJlbWFpbCI6ImFkbWluQGtlZXJ0aGlmb29kLmNvbSIsImlhdCI6MTc1MDQ3NjYzNywiZXhwIjoxNzUwNDgzODM3fQ.W0KkGK1g88G2sky12P_5OGLK1gEX1Q2Nmxh05L3X3vM

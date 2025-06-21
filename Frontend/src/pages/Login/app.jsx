@@ -23,6 +23,12 @@ const Login = () => {
 
     const onSubmitSuccess = (jwtToken) => {
     Cookies.set('jwt_token', jwtToken, { expires:30 });
+        setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setFullName('');
+    setPhone('');
+    setAddress('');
     navigate('/home', { replace: true });
   };
 
@@ -30,6 +36,7 @@ const Login = () => {
     if (e) e.preventDefault();
     setIsLoading(true);
     setMsg('');
+
     
     try {
       // Simulating API call - replace with your actual axios call
