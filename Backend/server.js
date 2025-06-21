@@ -9,19 +9,18 @@ const authMiddleware = require('./middleware/authMiddleware');
 
 const app = express();
 const PORT = 3000;
-const JWT_SECRET = 'your_secret_key';
+const JWT_SECRET = 'your_secret_key'; // Store securely in production
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // adjust if needed
+  origin: 'http://localhost:5173',
   credentials: true
 }));
-app.use(express.json()); // VERY IMPORTANT
-
+app.use(express.json());
 // MongoDB Connection
 mongoose.connect('mongodb://127.0.0.1:27017/myRes', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 mongoose.connection.once('open', () => console.log('✅ MongoDB connected'));
 
@@ -35,8 +34,8 @@ app.post('/api/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ fullName, email, phone, address, password: hashedPassword });
-
     await newUser.save();
+
     res.status(201).json({ message: 'Registration successful' });
   } catch (err) {
     res.status(500).json({ message: 'Registration failed', error: err.message });
@@ -73,7 +72,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// ✅ Profile (Protected)
+// ✅ Profile (Protected Route)
 app.get('/api/profile', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
