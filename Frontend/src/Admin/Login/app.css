@@ -1,0 +1,173 @@
+/* ──────────────────────────────────────────────────────────
+   Admin Login – pages/AdminLogin/app.css
+   (based on user login styles, but blue‑toned + no register mode)
+   ────────────────────────────────────────────────────────── */
+
+/* Main container with blue gradient background */
+.login-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+}
+
+/* Optional subtle moving blobs (keeps the page lively) */
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(2rem);
+  opacity: 0.25;
+  animation: pulse 4s infinite;
+}
+.gradient-blob.top-left {
+  top: -12rem; left: -8rem;
+  width: 22rem; height: 22rem;
+  background: #60a5fa;
+}
+.gradient-blob.bottom-right {
+  bottom: -12rem; right: -8rem;
+  width: 22rem; height: 22rem;
+  background: #3b82f6;
+  animation-delay: 2s;
+}
+
+/* Card shell */
+.login-card-container {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  z-index: 10;
+  margin: 0 1rem;
+}
+.login-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  border: 1px solid rgba(191, 219, 254, 0.6);
+  padding: 2rem;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+  transform: scale(1);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.login-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, .3);
+}
+
+/* Header */
+.header { text-align: center; margin-bottom: 2rem; }
+.logo-container {
+  width: 4rem; height: 4rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  margin: 0 auto 1rem;
+  box-shadow: 0 10px 24px -6px rgba(37, 99, 235, .5);
+}
+.logo-icon { width: 2rem; height: 2rem; color: #fff; }
+.app-title   { font-size: 1.875rem; font-weight: 700; color: #1e3a8a; }
+.app-subtitle{ font-size: .875rem;  color: #475569; margin-top: .25rem; }
+
+/* Messages */
+.message {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: .75rem;
+  border: 1px solid;
+  font-size: .875rem;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+.message.success { background: #dcfce7; border-color: #86efac; color: #166534; }
+.message.error   { background: #fee2e2; border-color: #fca5a5; color: #b91c1c; }
+
+/* Form layout */
+.form-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-field     { display: flex; flex-direction: column; }
+.form-label     { font-size: .875rem; font-weight: 500; color: #334155; margin-bottom: .5rem; }
+
+.input-container { position: relative; width: 100%; }
+.input-icon {
+  position: absolute; left: .75rem; top: 50%; transform: translateY(-50%);
+  width: 1.25rem; height: 1.25rem; color: #94a3b8; pointer-events: none;
+}
+.form-input {
+  width: 100%;
+  padding: .75rem .75rem .75rem 2.5rem;
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(148, 163, 184, .4);
+  border-radius: .75rem;
+  color: #1e293b;
+  transition: border-color .3s ease, background .3s ease;
+}
+.form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: rgba(255,255,255,.8);
+}
+.form-input::placeholder { color: #94a3b8; }
+
+/* password‑eye button */
+.password-toggle {
+  position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #94a3b8; transition: color .3s ease;
+}
+.password-toggle:hover { color: #2563eb; }
+.password-toggle-icon { width: 1.25rem; height: 1.25rem; }
+
+/* Submit btn */
+.submit-button {
+  width: 100%; padding: .75rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff; font-weight: 600;
+  border: none; border-radius: .75rem;
+  box-shadow: 0 10px 24px -6px rgba(37, 99, 235, .5);
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-.25rem);
+  box-shadow: 0 18px 32px -8px rgba(37, 99, 235, .4);
+}
+.submit-button:disabled { opacity: .55; cursor: not-allowed; }
+.submit-button-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  opacity: 0; transition: opacity .3s ease;
+}
+.submit-button:hover .submit-button-overlay { opacity: .6; }
+.submit-button-content { position: relative; z-index: 10; display: flex; align-items: center; }
+.loading-spinner {
+  height: 1.25rem; width: 1.25rem; border-radius: 50%;
+  border: 2px solid #fff; border-top-color: transparent;
+  animation: spin 1s linear infinite; margin-right: .5rem;
+}
+
+/* Footer links */
+.footer-links { margin-top: 2rem; text-align: center; }
+.footer-link,
+.footer-button {
+  font-size: .875rem;
+  color: #475569;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+.footer-link:hover,
+.footer-button:hover { color: #2563eb; }
+
+/* Animations */
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.7;} }
+@keyframes spin { to{ transform: rotate(360deg); } }
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .login-card { padding: 1.5rem; margin: 0 .5rem; }
+  .app-title { font-size: 1.5rem; }
+}
